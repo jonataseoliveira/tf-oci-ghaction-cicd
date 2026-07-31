@@ -16,8 +16,8 @@ env:
   TF_VAR_private_key:  ${{ secrets.OCI_PRIVATE_KEY }}
 
 jobs:
-  plan:
-    name: 'Terraform Plan'
+  terraform:
+    name: 'Terraform'
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -38,24 +38,6 @@ jobs:
       - name: Terraform Plan
         run: terraform plan -input=false
 
-  apply:
-    name: 'Terraform Apply'
-    needs: plan
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-    runs-on: ubuntu-latest
-    environment: production   # gate de aprovação vive aqui
-    defaults:
-      run:
-        shell: bash
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v3
-
-      - name: Terraform Init
-        run: terraform init
-
       - name: Terraform Apply
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: terraform apply -auto-approve -input=false
