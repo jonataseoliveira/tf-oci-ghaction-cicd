@@ -1,4 +1,11 @@
 terraform {
+  cloud {
+    organization = "jonataseo"
+
+    workspaces {
+      name = "gtactions"
+    }
+  }
   required_providers {
     oci = {
       source = "oracle/oci"
@@ -7,9 +14,11 @@ terraform {
 }
 
 provider "oci" {
-  region              = "sa-saopaulo-1"
-  auth                = "SecurityToken"
-  config_file_profile = "learn-terraform"
+  tenancy_ocid = var.tenancy_ocid
+  user_ocid    = var.user_ocid
+  fingerprint  = var.fingerprint
+  private_key  = var.private_key
+  region       = var.region
 }
 
 resource "oci_core_vcn" "internal" {

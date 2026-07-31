@@ -1,13 +1,28 @@
-# Terraform
 .terraform/
+ 
+# State local (nunca commitar — contém segredos e não tem locking)
 *.tfstate
 *.tfstate.*
+ 
+# Crash logs
 crash.log
-*.tfvars        # se contiverem secrets
+crash.*.log
+ 
+# Arquivos de variáveis com segredos (private_key, ocids)
+*.tfvars
 *.tfvars.json
+ 
+# Exceção: templates sem segredos PODEM ser commitados
+!*.tfvars.example
+ 
+# Arquivos de override
 override.tf
 override.tf.json
 *_override.tf
 *_override.tf.json
+ 
+# Configuração de CLI que pode conter credenciais
 .terraformrc
 terraform.rc
+ 
+# NÃO ignorar: .terraform.lock.hcl deve ser commitado (dependency lock dos providers)

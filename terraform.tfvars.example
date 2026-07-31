@@ -1,0 +1,17 @@
+# Copie para terraform.tfvars e preencha com valores reais.
+# terraform.tfvars NÃO deve ser commitado (está no .gitignore).
+# No CI estes valores vêm dos secrets do GitHub via TF_VAR_*.
+
+tenancy_ocid = "ocid1.tenancy.oc1..xxxx"
+user_ocid    = "ocid1.user.oc1..xxxx"
+fingerprint  = "aa:bb:cc:dd:ee:ff:00:11:22:33:44:55:66:77:88:99"
+
+private_key = <<-EOT
+-----BEGIN PRIVATE KEY-----
+...conteudo do .pem...
+-----END PRIVATE KEY-----
+EOT
+
+# Opcionais (já têm default em variables.tf):
+# region         = "sa-saopaulo-1"
+# compartment_id = "ocid1.compartment.oc1..xxxx"
