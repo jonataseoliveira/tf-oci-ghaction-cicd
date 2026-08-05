@@ -36,3 +36,12 @@ resource "oci_core_subnet" "dev" {
   prohibit_public_ip_on_vnic = true
   dns_label                  = "dev"
 }
+
+resource "oci_core_subnet" "dev" {
+  vcn_id                     = oci_core_vcn.internal.id
+  cidr_block                 = "172.16.1.0/24"
+  compartment_id             = "ocid1.compartment.oc1..aaaaaaaapglqvmmiolkvjwlhynctweqpjw5jl2hovgctqfcagke7zadoimda"
+  display_name               = "Dev subnet 5"
+  prohibit_public_ip_on_vnic = true
+  dns_label                  = "staging"
+}
